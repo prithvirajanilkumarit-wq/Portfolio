@@ -101,7 +101,7 @@ function Hero() {
           <div className="hero__image-ring" aria-hidden="true" />
           <div className="hero__image-border">
             <img
-              src="https://prithvirajanilkumarit-wq.github.io/Portfolio/profile.jpg"
+              src={`${process.env.PUBLIC_URL}/profile.jpg`}
               alt="Prithviraj Anilkumar — Data Analyst"
               className="hero__image"
               loading="eager"
