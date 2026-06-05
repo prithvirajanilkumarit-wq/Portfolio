@@ -1,0 +1,139 @@
+/* ---- Education ---- */
+.education__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 800px;
+}
+
+/* Card layout */
+.edu-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Left column (icon + line) */
+.edu-card__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.edu-card__icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.edu-card__line {
+  width: 2px;
+  flex: 1;
+  min-height: 30px;
+  background: linear-gradient(to bottom, rgba(99, 102, 241, 0.4), transparent);
+  border-radius: 1px;
+}
+
+/* Body */
+.edu-card__body {
+  flex: 1;
+}
+
+.edu-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.edu-card__degree {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.edu-card__institution {
+  font-size: 0.88rem;
+  color: var(--color-accent-light);
+  font-weight: 500;
+}
+
+.edu-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.edu-card__period {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.edu-card__status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.edu-card__status--active {
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.edu-card__status--done {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--color-accent-light);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* GPA */
+.edu-card__gpa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 6px;
+  padding: 0.25rem 0.7rem;
+}
+
+.edu-card__gpa-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.edu-card__gpa-value {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+}
+
+.edu-card__details {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .edu-card__header { flex-direction: column; }
+  .edu-card__meta   { align-items: flex-start; }
+  .edu-card__left   { display: none; }
+}
