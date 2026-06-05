@@ -22,7 +22,7 @@ function About() {
           <div className="about__image-col">
             <div className="about__image-frame">
               <img
-                src="/profile.jpg"
+                src="https://prithvirajanilkumarit-wq.github.io/Portfolio/profile.jpg"
                 alt="Prithviraj Anilkumar"
                 className="about__image"
                 loading="lazy"
