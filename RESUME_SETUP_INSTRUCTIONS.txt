@@ -1,0 +1,24 @@
+IMPORTANT — RESUME PDF SETUP
+==============================================
+
+To enable the "Download Resume" button on your portfolio:
+
+1. Take your resume file (e.g., from MS Word, Google Docs, or a scan)
+2. Export / Save it as a PDF file
+3. Rename the PDF file to exactly:
+
+        resume.pdf
+
+4. Copy that file into this folder:
+
+        Portfolio\public\resume.pdf
+
+   (It must be in the same folder as this file, index.html, and profile.jpg)
+
+5. Delete this placeholder file (RESUME_SETUP_INSTRUCTIONS.txt) once done.
+
+That's it! The download button on the portfolio will now work correctly.
+
+==============================================
+File expected at: Portfolio/public/resume.pdf
+Download name shown to visitors: Prithviraj_Anilkumar_Resume.pdf

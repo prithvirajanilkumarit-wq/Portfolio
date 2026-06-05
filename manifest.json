@@ -1,0 +1,9 @@
+{
+  "short_name": "Prithviraj",
+  "name": "Prithviraj Anilkumar Portfolio",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0a0a0f",
+  "background_color": "#0a0a0f"
+}
