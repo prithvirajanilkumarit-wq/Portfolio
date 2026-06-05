@@ -98,7 +98,7 @@ function Contact() {
             <div className="contact__resume">
               <p className="contact__resume-label">Download Resume</p>
               <a
-                href="/resume.pdf"
+                href="{`${process.env.PUBLIC_URL}/resume.pdf`}"
                 download="Prithviraj_Anilkumar_Resume.pdf"
                 className="btn-primary contact__resume-btn"
               >
