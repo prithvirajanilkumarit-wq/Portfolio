@@ -68,7 +68,7 @@ function Navbar() {
 
         {/* Downloads resume.pdf from the public/ folder */}
         <a
-          href={`${process.env.PUBLIC_URL}/resume.pdf`}
+          href={`${process.env.PUBLIC_URL}/resume.pdf?v=${Date.now()}`}
           download="Prithviraj_Anilkumar_Resume.pdf"
           className="navbar__cta btn-primary"
           aria-label="Download resume PDF"
