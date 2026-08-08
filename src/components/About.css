@@ -1,149 +1,216 @@
-/* ---- About ---- */
-.about__grid {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 3.5rem;
-  align-items: start;
+.about {
+  background: var(--color-bg-secondary);
+  position: relative;
 }
 
-/* Image column */
-.about__image-col {
+.about__grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Left Column - Unified Profile Card */
+.about__profile-card {
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
+  gap: 1rem;
+  height: 100%;
 }
 
 .about__image-frame {
-  width: 260px;
-  height: 260px;
-  border-radius: 20px;
-  padding: 3px;
-  background: var(--gradient-accent);
-  box-shadow: var(--shadow-glow);
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 
 .about__image {
-  width: 100%; height: 100%;
-  border-radius: 18px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
-  display: block;
 }
 
-.about__languages {
-  width: 100%;
-  text-align: center;
+.about__bio-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
 }
 
-.about__lang-label {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+.about__bio-icon {
+  font-size: 1.35rem;
+  color: var(--color-accent-purple);
+  flex-shrink: 0;
+}
+
+.about__bio-badge-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-bright);
+}
+
+.about__bio-badge-sub {
+  font-size: 0.76rem;
+  color: var(--color-accent-purple);
+}
+
+/* Languages Section inside Profile Card */
+.about__languages-section {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.about__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.6rem;
-  font-family: var(--font-code);
+}
+
+.about__card-header h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-bright);
+}
+
+.about__header-icon {
+  color: var(--color-accent-purple);
+  font-size: 0.95rem;
 }
 
 .about__lang-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  justify-content: center;
+  gap: 0.45rem;
 }
 
-/* Content column */
+.about__lang-tag {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Right Column Summary Card */
 .about__content-col {
+  height: 100%;
+}
+
+.about__summary-card {
+  padding: 1.6rem 1.8rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  justify-content: space-between;
 }
 
-.about__text {
-  font-size: 1rem;
-  color: var(--color-text-secondary);
-  line-height: 1.75;
+.about__summary-heading {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-bright);
   margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.6rem;
 }
 
-.about__text strong {
-  color: var(--color-text-primary);
+.about__paragraph {
+  font-size: 0.94rem;
+  color: var(--color-text-main);
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+
+.about__paragraph strong {
+  color: var(--color-text-bright);
   font-weight: 600;
 }
 
-/* Stats */
-.about__stats {
+.about__industry-wrap {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--color-border);
+}
+
+.about__industry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.about__industry-item {
+  font-size: 0.86rem;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.about__bullet {
+  color: var(--color-accent-purple);
+  font-weight: 700;
+}
+
+/* Integrated Stat Row at bottom of summary card */
+.about__stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin: 2rem 0 1.5rem;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
 }
 
-.about__stat {
-  background: var(--gradient-card);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 1rem 0.75rem;
+.about__stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  transition: all var(--transition-fast);
-}
-
-.about__stat:hover {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-2px);
+  padding: 0.6rem 0.4rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
 }
 
 .about__stat-value {
-  display: block;
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   font-weight: 700;
   background: var(--gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 0.15rem;
 }
 
 .about__stat-label {
-  display: block;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  margin-top: 0.2rem;
+  font-size: 0.74rem;
   font-weight: 500;
+  color: var(--color-text-bright);
+  line-height: 1.2;
 }
 
-/* Meta row */
-.about__meta {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.about__meta-item {
-  font-size: 0.88rem;
-  color: var(--color-text-secondary);
-}
-
-.about__meta-available {
-  color: #34d399;
-  font-weight: 500;
-}
-
-/* Responsive */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .about__grid {
     grid-template-columns: 1fr;
-    text-align: center;
   }
-
-  .about__image-col { align-items: center; }
-  .about__stats { grid-template-columns: repeat(2, 1fr); }
-  .about__meta { justify-content: center; }
+  .about__stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-@media (max-width: 480px) {
-  .about__stats { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 576px) {
+  .about__industry-grid {
+    grid-template-columns: 1fr;
+  }
+  .about__stats-row {
+    grid-template-columns: 1fr;
+  }
 }

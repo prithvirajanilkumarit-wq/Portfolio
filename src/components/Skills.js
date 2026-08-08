@@ -1,128 +1,193 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  FaDatabase,
+  FaChartBar,
+  FaCogs,
+  FaCode,
+  FaTools,
+  FaBookReader
+} from 'react-icons/fa';
 import './Skills.css';
 
-/* Skills grouped by category — sourced directly from resume */
 const SKILL_CATEGORIES = [
   {
-    id: 'languages',
-    label: 'Languages & Databases',
-    icon: '🗄️',
+    id: 'sql-db',
+    label: 'SQL & Database',
+    icon: FaDatabase,
+    description: 'Core strength in Microsoft SQL Server, query optimization, and stored procedure architecture.',
     skills: [
-      { name: 'SQL',        level: 85, note: 'Primary tool — stored procedures, query optimization' },
-      { name: 'Python',     level: 60, note: 'Data analysis with NumPy & Pandas' },
-      { name: 'JavaScript', level: 55, note: 'Frontend scripting and Angular apps' },
-      { name: 'HTML / CSS', level: 65, note: 'Markup and basic styling' },
-    ],
-  },
-  {
-    id: 'frameworks',
-    label: 'Frameworks & Platforms',
-    icon: '⚙️',
-    skills: [
-      { name: 'Angular',     level: 50, note: 'Frontend development in ERP context' },
-      { name: 'Jupyter Lab', level: 55, note: 'Python data analysis notebooks' },
-      { name: 'Swagger',     level: 45, note: 'REST API testing and documentation' },
-      { name: 'ASP.NET',     level: 40, note: 'Exposure through ERP solutions' },
-    ],
+      'Microsoft SQL Server',
+      'T-SQL Development',
+      'Stored Procedures',
+      'CTEs & Views',
+      'Subqueries',
+      'CASE Expressions',
+      'Temporary Tables',
+      'UNION Operations',
+      'User-Defined Functions',
+      'Complex JOINs',
+      'OPENJSON',
+      'Query Optimisation',
+      'SQL Debugging',
+      'Database Troubleshooting'
+    ]
   },
   {
     id: 'reporting',
-    label: 'Reporting & Analytics',
-    icon: '📊',
+    label: 'Reporting & Dashboards',
+    icon: FaChartBar,
+    description: 'Delivering operational MIS reports, ledger statements, and executive KPI summaries.',
     skills: [
-      { name: 'Power BI',              level: 65, note: 'Business intelligence dashboards' },
-      { name: 'SAP Crystal Reports',   level: 70, note: 'Professional client-facing reports' },
-      { name: 'RDLC',                  level: 65, note: 'Report Designer for .NET apps' },
-      { name: 'Microsoft Excel',       level: 75, note: 'Advanced formulas & data analysis' },
-    ],
+      'Crystal Reports',
+      'RDLC Reports',
+      'KPI Reporting',
+      'MIS Reporting',
+      'Business Reporting',
+      'Microsoft Excel',
+      'Internal ERP Dashboard Creation'
+    ]
   },
   {
-    id: 'specializations',
-    label: 'Specializations',
-    icon: '🎯',
+    id: 'erp-domain',
+    label: 'ERP & Business Domain',
+    icon: FaCogs,
+    description: 'Customising ERP/CRM modules for textile and business management enterprises.',
     skills: [
-      { name: 'ERP Customization',      level: 80, note: 'Textile & business management sectors' },
-      { name: 'CRM Systems',            level: 70, note: 'Client workflow management' },
-      { name: 'Dashboard Development',  level: 70, note: 'Custom visual dashboards for clients' },
-      { name: 'SQL Stored Procedures',  level: 80, note: 'Performance-focused query optimization' },
-      { name: 'Code Optimization',      level: 65, note: 'Module enhancement across deployments' },
-    ],
+      'ERP Customisation',
+      'CRM Workflows',
+      'Sales Module',
+      'Inventory Module',
+      'Accounting Module',
+      'Requirement Gathering',
+      'Client Communication'
+    ]
   },
+  {
+    id: 'programming',
+    label: 'Programming & Web',
+    icon: FaCode,
+    description: 'Front-end web fundamentals and Python scripting for data handling.',
+    skills: [
+      'JavaScript (Basic)',
+      'HTML5',
+      'CSS3',
+      'Python (Basic Scripting)',
+      'Pandas (Basic)',
+      'NumPy (Basic)'
+    ]
+  },
+  {
+    id: 'tools',
+    label: 'Tools & Platforms',
+    icon: FaTools,
+    description: 'Development environments, API contract testing, and version control.',
+    skills: [
+      'Git',
+      'GitHub',
+      'VS Code',
+      'Swagger API',
+      'Microsoft Excel'
+    ]
+  },
+  {
+    id: 'learning',
+    label: 'Currently Learning',
+    icon: FaBookReader,
+    description: 'Actively acquiring advanced business intelligence and analytics capabilities.',
+    skills: [
+      'Power BI (DAX)',
+      'Data Modelling',
+      'Row-Level Security (RLS)',
+      'Power Query',
+      'Statistics for Data Analysis',
+      'Python for Data Analytics'
+    ]
+  }
 ];
 
-/* Level label helper */
-function levelLabel(level) {
-  if (level >= 80) return 'Proficient';
-  if (level >= 60) return 'Working Knowledge';
-  if (level >= 40) return 'Familiar';
-  return 'Beginner';
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04
+    }
+  }
+};
+
+const badgeVariants = {
+  hidden: { opacity: 0, y: 12, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3 } }
+};
 
 function Skills() {
-  const [activeTab, setActiveTab] = useState('languages');
+  const [activeCat, setActiveCat] = useState('sql-db');
 
-  const activeCategory = SKILL_CATEGORIES.find((c) => c.id === activeTab);
+  const activeData = SKILL_CATEGORIES.find((c) => c.id === activeCat);
 
   return (
     <section id="skills" className="skills">
       <div className="container">
-        <span className="section-label">// what I work with</span>
-        <h2 className="section-title">Technical <span>Skills</span></h2>
-        <div className="section-divider" />
-
-        {/* Tab navigation */}
-        <div className="skills__tabs" role="tablist">
-          {SKILL_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              role="tab"
-              aria-selected={activeTab === cat.id}
-              id={`tab-${cat.id}`}
-              className={`skills__tab ${activeTab === cat.id ? 'skills__tab--active' : ''}`}
-              onClick={() => setActiveTab(cat.id)}
-            >
-              <span>{cat.icon}</span>
-              {cat.label}
-            </button>
-          ))}
+        <div className="section-header">
+          <span className="section-label">{`// Technical Stack`}</span>
+          <h2 className="section-title">Core <span>Competencies</span></h2>
+          <p className="section-subtitle">
+            Technical skills, database capabilities, and domain knowledge strictly sourced from my resume.
+          </p>
         </div>
 
-        {/* Skill bars */}
-        <div
-          className="skills__panel"
-          role="tabpanel"
-          aria-labelledby={`tab-${activeTab}`}
-          key={activeTab}
+        {/* Tab switcher */}
+        <div className="skills__tabs">
+          {SKILL_CATEGORIES.map((cat) => {
+            const Icon = cat.icon;
+            const isActive = activeCat === cat.id;
+            return (
+              <button
+                key={cat.id}
+                className={`skills__tab-btn ${isActive ? 'skills__tab-btn--active' : ''}`}
+                onClick={() => setActiveCat(cat.id)}
+              >
+                <Icon className="skills__tab-icon" />
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Category Panel */}
+        <motion.div
+          key={activeCat}
+          className="skills__panel glass-card"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
         >
-          {activeCategory.skills.map((skill) => (
-            <div key={skill.name} className="skill-item">
-              <div className="skill-item__header">
-                <span className="skill-item__name">{skill.name}</span>
-                <div className="skill-item__right">
-                  <span className="skill-item__label">{levelLabel(skill.level)}</span>
-                  <span className="skill-item__pct">{skill.level}%</span>
-                </div>
-              </div>
-              <div className="skill-item__bar-bg" role="progressbar" aria-valuenow={skill.level} aria-valuemin="0" aria-valuemax="100" aria-label={`${skill.name} proficiency: ${skill.level}%`}>
-                <div
-                  className="skill-item__bar-fill"
-                  style={{ '--width': `${skill.level}%` }}
-                />
-              </div>
-              <p className="skill-item__note">{skill.note}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* All skill tags overview */}
-        <div className="skills__tag-cloud">
-          <p className="skills__tag-cloud-label">All Technologies</p>
-          <div className="skills__tags">
-            {SKILL_CATEGORIES.flatMap((cat) => cat.skills).map((skill) => (
-              <span key={skill.name} className="tag">{skill.name}</span>
-            ))}
+          <div className="skills__panel-header">
+            <h3>{activeData.label}</h3>
+            <p>{activeData.description}</p>
           </div>
-        </div>
+
+          <motion.div
+            className="skills__grid"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {activeData.skills.map((skill) => (
+              <motion.div
+                key={skill}
+                className="skills__badge-card"
+                variants={badgeVariants}
+                whileHover={{ scale: 1.03, y: -3 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
+                <span className="skills__badge-dot" />
+                <span className="skills__badge-text">{skill}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

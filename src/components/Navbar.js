@@ -1,114 +1,143 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+import { FaGithub, FaFileDownload, FaTimes, FaBars, FaSun, FaMoon } from 'react-icons/fa';
 import './Navbar.css';
 
-/* Navigation links matching section IDs */
 const NAV_LINKS = [
-  { label: 'About',       to: 'about' },
-  { label: 'Skills',      to: 'skills' },
-  { label: 'Experience',  to: 'experience' },
-  { label: 'Projects',    to: 'projects' },
-  { label: 'Education',   to: 'education' },
-  { label: 'Achievements',to: 'achievements' },
-  { label: 'Contact',     to: 'contact' },
+  { label: 'Home', to: 'hero' },
+  { label: 'About', to: 'about' },
+  { label: 'Experience', to: 'experience' },
+  { label: 'Projects', to: 'projects' },
+  { label: 'Skills', to: 'skills' },
+  { label: 'Contact', to: 'contact' },
 ];
 
-function Navbar() {
+function Navbar({ theme, onToggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
-  useEffect(() => {
-    const handleResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} role="navigation" aria-label="Main navigation">
-      <div className="navbar__container">
-        {/* Logo */}
+    <header className={`navbar-floating ${scrolled ? 'navbar-floating--scrolled' : ''}`}>
+      <div className="navbar-floating__container">
+        {/* Brand / Home Logo */}
         <Link
           to="hero"
           smooth
           duration={500}
-          className="navbar__logo"
-          aria-label="Go to top"
+          className="navbar-floating__logo"
+          aria-label="Home"
         >
-          <span className="navbar__logo-bracket">&lt;</span>
-          PA
-          <span className="navbar__logo-bracket">/&gt;</span>
+          <img
+            src={`${process.env.PUBLIC_URL}/logo.jpg`}
+            alt="Prithviraj Anilkumar Logo"
+            className="navbar-floating__logo-img"
+          />
         </Link>
 
-        {/* Desktop nav links */}
-        <ul className="navbar__links" role="menubar">
+        {/* Desktop Nav Links */}
+        <nav className="navbar-floating__nav">
           {NAV_LINKS.map((link) => (
-            <li key={link.to} role="none">
-              <Link
-                to={link.to}
-                smooth
-                duration={500}
-                offset={-70}
-                spy
-                activeClass="navbar__link--active"
-                className="navbar__link"
-                role="menuitem"
-              >
-                {link.label}
-              </Link>
-            </li>
+            <Link
+              key={link.to}
+              to={link.to}
+              smooth
+              duration={500}
+              offset={-90}
+              spy
+              activeClass="navbar-floating__link--active"
+              className="navbar-floating__link"
+            >
+              {link.label}
+            </Link>
           ))}
-        </ul>
+        </nav>
 
-        {/* Downloads resume.pdf from the public/ folder */}
-        <a
-          href={`${process.env.PUBLIC_URL}/resume.pdf?v=${Date.now()}`}
-          download="Prithviraj_Anilkumar_Resume.pdf"
-          className="navbar__cta btn-primary"
-          aria-label="Download resume PDF"
-        >
-          Resume
-        </a>
+        {/* Right Actions */}
+        <div className="navbar-floating__actions">
+          {/* Theme Toggle Button */}
+          <button
+            className="navbar-floating__theme-btn"
+            onClick={onToggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          >
+            {theme === 'dark' ? (
+              <FaSun className="navbar-floating__theme-icon text-amber" />
+            ) : (
+              <FaMoon className="navbar-floating__theme-icon text-purple" />
+            )}
+          </button>
 
-        {/* Hamburger */}
-        <button
-          className={`navbar__hamburger ${menuOpen ? 'navbar__hamburger--open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          {/* GitHub Star Pill */}
+          <a
+            href="https://github.com/prithvirajanilkumarit-wq/Portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-floating__github-btn"
+            aria-label="GitHub Repository"
+          >
+            <FaGithub className="navbar-floating__action-icon" />
+            <span className="navbar-floating__gh-text">GitHub</span>
+          </a>
+
+          {/* Resume Button */}
+          <a
+            href={`${process.env.PUBLIC_URL}/resume.pdf`}
+            download="Prithviraj_Anilkumar_Resume.pdf"
+            className="navbar-floating__resume-btn"
+            aria-label="Download Resume"
+          >
+            <FaFileDownload />
+          </a>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="navbar-floating__hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close Menu' : 'Open Menu'}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`navbar__mobile ${menuOpen ? 'navbar__mobile--open' : ''}`} role="dialog" aria-modal="true">
-        <ul>
+      {/* Mobile Menu Drawer */}
+      <div className={`navbar-floating__mobile ${menuOpen ? 'navbar-floating__mobile--open' : ''}`}>
+        <div className="navbar-floating__mobile-content">
           {NAV_LINKS.map((link) => (
-            <li key={link.to}>
-              <Link
-                to={link.to}
-                smooth
-                duration={500}
-                offset={-70}
-                className="navbar__mobile-link"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            </li>
+            <Link
+              key={link.to}
+              to={link.to}
+              smooth
+              duration={500}
+              offset={-90}
+              className="navbar-floating__mobile-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
           ))}
-        </ul>
+          <div className="navbar-floating__mobile-row">
+            <button
+              className="btn-secondary navbar-floating__mobile-theme"
+              onClick={() => {
+                onToggleTheme();
+              }}
+            >
+              {theme === 'dark' ? <FaSun /> : <FaMoon />} {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </button>
+          </div>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
 

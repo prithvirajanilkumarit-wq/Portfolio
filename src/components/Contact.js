@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaGithub,
+  FaFileDownload,
+  FaPaperPlane,
+  FaCopy
+} from 'react-icons/fa';
 import './Contact.css';
 
-function Contact() {
+function Contact({ onToast }) {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [status, setStatus] = useState('idle');
+
+  const handleCopy = (text, label) => {
+    navigator.clipboard?.writeText(text);
+    if (onToast) onToast(`Copied ${label} to clipboard!`);
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -13,179 +29,221 @@ function Contact() {
     e.preventDefault();
     setStatus('sending');
 
-    /* Build mailto link as fallback (no backend required) */
     const { name, email, subject, message } = formData;
-    const body = `Name: ${name}%0AFrom: ${email}%0A%0A${encodeURIComponent(message)}`;
+    const body = `Name: ${name}%0AEmail: ${email}%0A%0A${encodeURIComponent(message)}`;
     const mailtoLink = `mailto:prithviraj.anilkumar.it@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
     window.location.href = mailtoLink;
 
     setTimeout(() => {
       setStatus('sent');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 800);
+    }, 1000);
   };
 
   return (
     <section id="contact" className="contact">
       <div className="container">
-        <span className="section-label">// get in touch</span>
-        <h2 className="section-title">Contact <span>Me</span></h2>
-        <div className="section-divider" />
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">{`// Get In Touch`}</span>
+          <h2 className="section-title">Contact <span>Me</span></h2>
+          <p className="section-subtitle">
+            Interested in collaboration or open SQL Developer / ERP Reporting / Data Analyst roles? Reach out directly.
+          </p>
+        </motion.div>
 
         <div className="contact__grid">
-          {/* Left: info */}
-          <div className="contact__info">
-            <p className="contact__intro">
-              I'm currently open to new opportunities — whether it's a full-time role in data
-              analytics, business intelligence, or full-stack development. Feel free to reach out!
-            </p>
-
-            <div className="contact__details">
-              <a href="mailto:prithviraj.anilkumar.it@gmail.com" className="contact__detail-item" aria-label="Send email">
-                <div className="contact__detail-icon" aria-hidden="true">✉</div>
-                <div>
-                  <p className="contact__detail-label">Email</p>
-                  <p className="contact__detail-value">prithviraj.anilkumar.it@gmail.com</p>
-                </div>
-              </a>
-
-              <a href="tel:+917096512260" className="contact__detail-item" aria-label="Call phone number">
-                <div className="contact__detail-icon" aria-hidden="true">📱</div>
-                <div>
-                  <p className="contact__detail-label">Phone</p>
-                  <p className="contact__detail-value">+91-7096512260</p>
-                </div>
-              </a>
-
-              <div className="contact__detail-item">
-                <div className="contact__detail-icon" aria-hidden="true">📍</div>
-                <div>
-                  <p className="contact__detail-label">Location</p>
-                  <p className="contact__detail-value">Surat, Gujarat 395017, India</p>
-                </div>
-              </div>
-
-              <a
-                href="https://www.linkedin.com/in/prithviraj-anilkumar-974046329"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact__detail-item"
-                aria-label="Visit LinkedIn profile"
-              >
-                <div className="contact__detail-icon" aria-hidden="true">💼</div>
-                <div>
-                  <p className="contact__detail-label">LinkedIn</p>
-                  <p className="contact__detail-value">linkedin.com/in/prithviraj-anilkumar-974046329</p>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/prithvirajanilkumarit-wq"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact__detail-item"
-                aria-label="Visit GitHub profile"
-              >
-                <div className="contact__detail-icon" aria-hidden="true">🐙</div>
-                <div>
-                  <p className="contact__detail-label">GitHub</p>
-                  <p className="contact__detail-value">github.com/prithvirajanilkumarit-wq</p>
-                </div>
-              </a>
-            </div>
-
-            {/* Resume download button */}
-            <div className="contact__resume">
-              <p className="contact__resume-label">Download Resume</p>
-              <a
-                href={`${process.env.PUBLIC_URL}/resume.pdf?v=${Date.now()}`}
-                download="Prithviraj_Anilkumar_Resume.pdf"
-                className="btn-primary contact__resume-btn"
-              >
-                📄 Download Resume (PDF)
-              </a>
-            </div>
-          </div>
-
-          {/* Right: form */}
-          <form
-            className="contact__form card"
-            onSubmit={handleSubmit}
-            aria-label="Contact form"
+          {/* Left Column: Direct Contact Info */}
+          <motion.div
+            className="contact__info-col"
+            initial={{ opacity: 0, x: -35 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.55 }}
           >
-            <div className="contact__form-row">
+            <div className="contact__info-card glass-card">
+              <h3 className="contact__heading">Contact Information</h3>
+              <p className="contact__desc">
+                Feel free to reach out for job opportunities, project inquiries, or networking.
+              </p>
+
+              <div className="contact__details">
+                <motion.button
+                  className="contact__item contact__item-btn"
+                  onClick={() => handleCopy('prithviraj.anilkumar.it@gmail.com', 'email')}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
+                  <div className="contact__icon-box"><FaEnvelope /></div>
+                  <div className="contact__text-wrap">
+                    <span className="contact__label">Email (Click to copy)</span>
+                    <span className="contact__value">prithviraj.anilkumar.it@gmail.com</span>
+                  </div>
+                  <FaCopy className="contact__copy-icon" />
+                </motion.button>
+
+                <motion.button
+                  className="contact__item contact__item-btn"
+                  onClick={() => handleCopy('+91-7096512260', 'phone')}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
+                  <div className="contact__icon-box"><FaPhoneAlt /></div>
+                  <div className="contact__text-wrap">
+                    <span className="contact__label">Phone (Click to copy)</span>
+                    <span className="contact__value">+91-7096512260</span>
+                  </div>
+                  <FaCopy className="contact__copy-icon" />
+                </motion.button>
+
+                <motion.div
+                  className="contact__item"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
+                  <div className="contact__icon-box"><FaMapMarkerAlt /></div>
+                  <div className="contact__text-wrap">
+                    <span className="contact__label">Location</span>
+                    <span className="contact__value">Surat, Gujarat, India</span>
+                  </div>
+                </motion.div>
+
+                <motion.a
+                  href="https://www.linkedin.com/in/prithviraj-anilkumar-974046329/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__item"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
+                  <div className="contact__icon-box"><FaLinkedin /></div>
+                  <div className="contact__text-wrap">
+                    <span className="contact__label">LinkedIn</span>
+                    <span className="contact__value">prithviraj-anilkumar-974046329</span>
+                  </div>
+                </motion.a>
+
+                <motion.a
+                  href="https://github.com/prithvirajanilkumarit-wq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__item"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
+                  <div className="contact__icon-box"><FaGithub /></div>
+                  <div className="contact__text-wrap">
+                    <span className="contact__label">GitHub</span>
+                    <span className="contact__value">github.com/prithvirajanilkumarit-wq</span>
+                  </div>
+                </motion.a>
+              </div>
+
+              {/* Download Resume Box */}
+              <div className="contact__resume-box">
+                <a
+                  href={`${process.env.PUBLIC_URL}/resume.pdf`}
+                  download="Prithviraj_Anilkumar_Resume.pdf"
+                  className="btn-primary contact__resume-btn"
+                >
+                  <FaFileDownload /> Download Resume (PDF)
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Contact Form */}
+          <motion.div
+            className="contact__form-col"
+            initial={{ opacity: 0, x: 35 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.55 }}
+          >
+            <form className="contact__form glass-card" onSubmit={handleSubmit}>
+              <h3 className="contact__heading">Send a Message</h3>
+
+              <div className="contact__input-group">
+                <div className="contact__field">
+                  <label htmlFor="name" className="contact__field-label">Your Name *</label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    className="contact__input"
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="contact__field">
+                  <label htmlFor="email" className="contact__field-label">Your Email *</label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    className="contact__input"
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
               <div className="contact__field">
-                <label htmlFor="contact-name" className="contact__label">Name *</label>
+                <label htmlFor="subject" className="contact__field-label">Subject *</label>
                 <input
-                  id="contact-name"
+                  id="subject"
                   type="text"
-                  name="name"
+                  name="subject"
                   className="contact__input"
-                  placeholder="Your full name"
-                  value={formData.name}
+                  placeholder="Job Opportunity / SQL Inquiry / Project"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
-                  autoComplete="name"
                 />
               </div>
 
               <div className="contact__field">
-                <label htmlFor="contact-email" className="contact__label">Email *</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  className="contact__input"
-                  placeholder="your@email.com"
-                  value={formData.email}
+                <label htmlFor="message" className="contact__field-label">Message *</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="contact__input contact__textarea"
+                  placeholder="Type your message here..."
+                  rows={4}
+                  value={formData.message}
                   onChange={handleChange}
                   required
-                  autoComplete="email"
                 />
               </div>
-            </div>
 
-            <div className="contact__field">
-              <label htmlFor="contact-subject" className="contact__label">Subject *</label>
-              <input
-                id="contact-subject"
-                type="text"
-                name="subject"
-                className="contact__input"
-                placeholder="Opportunity / Collaboration / General"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="contact__field">
-              <label htmlFor="contact-message" className="contact__label">Message *</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                className="contact__input contact__textarea"
-                placeholder="Write your message here..."
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn-primary contact__submit"
-              disabled={status === 'sending'}
-              aria-live="polite"
-            >
-              {status === 'sending' ? 'Opening mail...' : status === 'sent' ? '✓ Mail opened!' : 'Send Message →'}
-            </button>
-
-            <p className="contact__note">
-              * Clicking Send will open your default mail client with the message pre-filled.
-            </p>
-          </form>
+              <button
+                type="submit"
+                className="btn-primary contact__submit-btn"
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? (
+                  'Preparing Mail...'
+                ) : status === 'sent' ? (
+                  '✓ Mail Client Opened!'
+                ) : (
+                  <>
+                    <span>Send Message</span> <FaPaperPlane />
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,128 +1,205 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-scroll';
+import { motion } from 'framer-motion';
+import {
+  FaEnvelope,
+  FaLinkedin,
+  FaGithub,
+  FaArrowRight,
+  FaMapMarkerAlt,
+  FaDatabase,
+  FaChartPie,
+  FaCogs,
+  FaPhoneAlt,
+  FaCopy
+} from 'react-icons/fa';
 import './Hero.css';
 
-/* Typewriter words */
-const ROLES = [
-  'Data Analyst',
-  'ERP Solutions Developer',
-  'SQL Optimization Specialist',
-  'Dashboard Developer',
-  'MCA Student @ LPU',
-];
-
-function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState('');
-  const [typing, setTyping] = useState(true);
-
-  /* Typewriter effect */
-  useEffect(() => {
-    const current = ROLES[roleIndex];
-    let timeout;
-
-    if (typing) {
-      if (displayed.length < current.length) {
-        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 70);
-      } else {
-        timeout = setTimeout(() => setTyping(false), 2000);
-      }
-    } else {
-      if (displayed.length > 0) {
-        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
-      } else {
-        setRoleIndex((i) => (i + 1) % ROLES.length);
-        setTyping(true);
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, typing, roleIndex]);
+function Hero({ onToast }) {
+  const handleCopy = (text, label) => {
+    navigator.clipboard?.writeText(text);
+    if (onToast) onToast(`Copied ${label} to clipboard!`);
+  };
 
   return (
     <section id="hero" className="hero">
-      {/* Ambient background particles */}
-      <div className="hero__bg-grid" aria-hidden="true" />
-      <div className="hero__orb hero__orb--1" aria-hidden="true" />
-      <div className="hero__orb hero__orb--2" aria-hidden="true" />
+      {/* Background radial ambient blur */}
+      <div className="hero__background-glow" aria-hidden="true" />
 
       <div className="container hero__container">
-        {/* Text content */}
-        <div className="hero__content">
-          <p className="hero__greeting animate-fade-up" style={{ animationDelay: '0.1s' }}>
-            👋 Hello, I'm
-          </p>
+        {/* Top Centered Section */}
+        <motion.div
+          className="hero__top-section"
+          initial={{ opacity: 0, y: -25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Avatar with Multi-gradient Aura Glow */}
+          <div className="hero__avatar-container group animate-float-slow">
+            <div className="hero__aura-blur" />
+            <div className="hero__avatar-frame">
+              <img
+                src={`${process.env.PUBLIC_URL}/profile.jpg`}
+                alt="Prithviraj Anilkumar"
+                className="hero__avatar-img"
+              />
+            </div>
+          </div>
 
-          <h1 className="hero__name animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Prithviraj<br />
-            <span className="hero__name-accent">Anilkumar</span>
+          {/* Status Badge Pill */}
+          <div className="hero__status-pill">
+            <div className="hero__status-dots">
+              <div className="hero__status-ping" />
+              <div className="hero__status-dot" />
+            </div>
+            <span className="hero__status-text">Available for Opportunities</span>
+          </div>
+
+          {/* Main Title */}
+          <h1 className="hero__title">
+            Hi. I'm <span className="hero__title-name">Prithviraj Anilkumar</span>
           </h1>
 
-          <div className="hero__typewriter animate-fade-up" style={{ animationDelay: '0.35s' }}>
-            <span className="hero__role">{displayed}</span>
-            <span className="hero__cursor" aria-hidden="true">|</span>
-          </div>
-
-          <p className="hero__summary animate-fade-up" style={{ animationDelay: '0.5s' }}>
-            Results-driven Data Analyst and MCA student with 2+ years of experience delivering
-            ERP-based solutions, SQL report optimization, and full-stack software development.
-            Based in <span className="hero__highlight">Surat, Gujarat</span>.
+          {/* Subheadline */}
+          <p className="hero__subtitle">
+            A <strong>SQL Developer & ERP Reporting Specialist</strong> who likes <em>building data solutions</em>.
           </p>
 
-          {/* Contact chips */}
-          <div className="hero__chips animate-fade-up" style={{ animationDelay: '0.6s' }}>
-            <a href="mailto:prithviraj.anilkumar.it@gmail.com" className="hero__chip">
-              ✉ prithviraj.anilkumar.it@gmail.com
-            </a>
-            <a href="tel:+917096512260" className="hero__chip">
-              📱 +91-7096512260
-            </a>
-            <a href="https://www.linkedin.com/in/prithviraj-anilkumar-974046329" target="_blank" rel="noopener noreferrer" className="hero__chip">
-              💼 LinkedIn
-            </a>
-            <a href="https://github.com/prithvirajanilkumarit-wq" target="_blank" rel="noopener noreferrer" className="hero__chip">
-              🐙 GitHub
-            </a>
-          </div>
+          {/* Action Row */}
+          <div className="hero__action-row">
+            <div className="hero__social-icons">
+              <a
+                href="mailto:prithviraj.anilkumar.it@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero__social-icon-btn animate-wiggle"
+                aria-label="Email"
+              >
+                <FaEnvelope />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/prithviraj-anilkumar-974046329/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero__social-icon-btn animate-wiggle"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://github.com/prithvirajanilkumarit-wq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero__social-icon-btn animate-wiggle"
+                aria-label="GitHub"
+              >
+                <FaGithub />
+              </a>
+            </div>
 
-          {/* CTAs */}
-          <div className="hero__ctas animate-fade-up" style={{ animationDelay: '0.72s' }}>
-            <Link to="projects" smooth duration={500} offset={-70} className="btn-primary">
-              View My Work
+            <span className="hero__row-separator" aria-hidden="true" />
+
+            <Link to="projects" smooth duration={500} offset={-90} className="hero__work-btn">
+              <span>View my work</span>
+              <FaArrowRight className="hero__work-arrow" />
             </Link>
-            <Link to="contact" smooth duration={500} offset={-70} className="btn-outline">
-              Get In Touch
-            </Link>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Profile image */}
-        <div className="hero__image-wrap animate-fade-up" style={{ animationDelay: '0.45s' }}>
-          <div className="hero__image-ring" aria-hidden="true" />
-          <div className="hero__image-border">
-            <img
-              src={`${process.env.PUBLIC_URL}/profile.jpg`}
-              alt="Prithviraj Anilkumar — Data Analyst"
-              className="hero__image"
-              loading="eager"
-            />
-          </div>
-          {/* Floating badge */}
-          <div className="hero__badge" aria-label="Open to work">
-            <span className="hero__badge-dot" aria-hidden="true" />
-            Open to Work
-          </div>
-        </div>
-      </div>
+        {/* Bento Grid Dashboard (Shivy Patel Style) */}
+        <motion.div
+          className="hero__bento-grid"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          {/* Card 1: Location */}
+          <motion.div
+            className="bento-card bento-card--location glass-card"
+            whileHover={{ y: -5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          >
+            <div className="bento-card__header">
+              <FaMapMarkerAlt className="bento-card__icon text-purple" />
+              <h3>Based In</h3>
+            </div>
+            <p className="bento-card__value">Surat, Gujarat, India</p>
+            <p className="bento-card__sub">Open to remote & relocation opportunities</p>
+          </motion.div>
 
-      {/* Scroll cue */}
-      <div className="hero__scroll-cue" aria-label="Scroll down">
-        <Link to="about" smooth duration={500} offset={-70}>
-          <div className="hero__scroll-mouse">
-            <div className="hero__scroll-wheel" />
-          </div>
-          <p>Scroll</p>
-        </Link>
+          {/* Card 2: Current Focus / Soundwave */}
+          <motion.div
+            className="bento-card bento-card--focus glass-card"
+            whileHover={{ y: -5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          >
+            <div className="bento-card__header">
+              <div className="bento-card__soundwave" aria-hidden="true">
+                <span className="animate-sound-wave" style={{ animationDelay: '0s' }} />
+                <span className="animate-sound-wave" style={{ animationDelay: '0.15s' }} />
+                <span className="animate-sound-wave" style={{ animationDelay: '0.3s' }} />
+                <span className="animate-sound-wave" style={{ animationDelay: '0.45s' }} />
+              </div>
+              <h3>Currently Enhancing</h3>
+            </div>
+            <p className="bento-card__value">Power BI (DAX, RLS) & Python Analytics</p>
+            <p className="bento-card__sub">LPU MCA Scholar (2024–2026)</p>
+          </motion.div>
+
+          {/* Card 3: Database Competency */}
+          <motion.div
+            className="bento-card bento-card--db glass-card"
+            whileHover={{ y: -5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          >
+            <div className="bento-card__header">
+              <FaDatabase className="bento-card__icon text-amber" />
+              <h3>Core Specialization</h3>
+            </div>
+            <p className="bento-card__value">T-SQL Stored Procedures & CTEs</p>
+            <p className="bento-card__sub">~2 Years @ Ramatek Solution</p>
+          </motion.div>
+
+          {/* Card 4: Reporting Competency */}
+          <motion.div
+            className="bento-card bento-card--reporting glass-card"
+            whileHover={{ y: -5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          >
+            <div className="bento-card__header">
+              <FaChartPie className="bento-card__icon text-sky" />
+              <h3>Reporting Suites</h3>
+            </div>
+            <p className="bento-card__value">Crystal Reports & RDLC Layouts</p>
+            <p className="bento-card__sub">Sales, Accounting & Inventory MIS</p>
+          </motion.div>
+
+          {/* Card 5: Connect */}
+          <motion.div
+            className="bento-card bento-card--connect glass-card"
+            whileHover={{ y: -5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          >
+            <div className="bento-card__header">
+              <FaCogs className="bento-card__icon text-emerald" />
+              <h3>Quick Connect</h3>
+            </div>
+            <div className="bento-card__links">
+              <button
+                className="bento-card__link bento-card__link-btn"
+                onClick={() => handleCopy('prithviraj.anilkumar.it@gmail.com', 'email')}
+              >
+                <FaEnvelope /> prithviraj.anilkumar.it@gmail.com <FaCopy className="bento-card__copy-icon" />
+              </button>
+              <button
+                className="bento-card__link bento-card__link-btn"
+                onClick={() => handleCopy('+91-7096512260', 'phone')}
+              >
+                <FaPhoneAlt /> +91-7096512260 <FaCopy className="bento-card__copy-icon" />
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

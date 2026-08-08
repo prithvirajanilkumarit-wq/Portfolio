@@ -1,251 +1,159 @@
-# Prithviraj Anilkumar — Personal Portfolio
+# Prithviraj Anilkumar — Personal Portfolio Website
 
-A modern, dark-themed personal portfolio website built with **React 18**.
+![Portfolio Preview Banner](https://via.placeholder.com/1200x600/0b0f19/818cf8?text=Prithviraj+Anilkumar+-+SQL+Developer+%26+Data+Analyst+Portfolio)
 
----
-
-## 📋 Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Running Locally](#running-locally)
-- [Building for Production](#building-for-production)
-- [GitHub Pages Deployment](#github-pages-deployment)
-- [Troubleshooting](#troubleshooting)
+> A modern, dark-themed, glassmorphic portfolio website built with **React 18**, **Framer Motion**, and **React Icons**, taking UI/UX inspiration from leading modern developer portfolios while adhering **100% strictly to resume factual data**.
 
 ---
 
-## ✅ Prerequisites
+## 🌟 Portfolio Overview
 
-Before you start, make sure the following are installed on your computer:
+This repository contains the source code for the personal portfolio of **Prithviraj Anilkumar**, a **SQL Developer, ERP Reporting Developer & Data Analyst** based in Surat, Gujarat, India.
 
-### 1. Node.js (version 16.x or higher — 18.x recommended)
+The portfolio highlights ~2 years of experience at **Ramatek Solution** delivering T-SQL stored procedures, Crystal Reports, and RDLC reporting solutions for textile and business management ERP deployments, alongside academic credentials (MCA at LPU, BCA Distinction at BMU).
 
-**Check if you have Node.js:**
-```bash
-node --version
-```
+---
 
-If you don't have Node.js, download it from: https://nodejs.org/en/download
+## ✨ Features
 
-Choose the **LTS (Long Term Support)** version. It includes `npm` automatically.
+- 💎 **Modern Obsidian Glassmorphic Design System**: Dark theme (`#0b0f19`) with backdrop blur, indigo/violet neon glows, and custom typography (`Outfit`, `Inter`, `JetBrains Mono`).
+- ⚡ **Interactive Motion Animations**: Powered by `framer-motion` for smooth entry reveals, layout shifts, hover card elevation, and interactive tabs.
+- 📌 **Top Scroll Progress Indicator**: Visual progress bar tracking reading depth down the page.
+- 🎯 **100% Resume Grounded**: Every qualification, metric, project, and experience bullet strictly matches the official resume.
+- 📱 **Fully Responsive Layout**: Seamless UX across desktop, laptop, tablet, and mobile browsers.
+- 🔍 **Categorized Skill & Project Filters**: Interactive tab switchers for database tools, reporting platforms, ERP domains, and project confidentiality badges.
+- 📄 **Direct Resume PDF Download**: One-click download of `resume.pdf`.
+- 📬 **Interactive Mailto Contact Form**: Instant email pre-filling for job opportunities and inquiries.
 
-### 2. npm (comes with Node.js)
+---
 
-**Check if you have npm:**
-```bash
-npm --version
-```
+## 🛠️ Technologies Used
+
+- **Core**: React 18 (`react`, `react-dom`)
+- **Animation & Micro-interactions**: Framer Motion (`framer-motion`)
+- **Icons**: React Icons (`react-icons`)
+- **Scroll Handling**: React Scroll (`react-scroll`)
+- **Styling**: Modern Vanilla CSS with CSS Variables & Glassmorphism
+- **Fonts**: Google Fonts (`Outfit`, `Inter`, `JetBrains Mono`)
+- **Deployment**: GitHub Pages (`gh-pages`)
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 Portfolio/
 ├── public/
-│   ├── index.html          ← Main HTML template
-│   ├── manifest.json       ← PWA manifest
-│   └── profile.jpg         ← Your profile photo (already included)
+│   ├── favicon.ico              # Site icon
+│   ├── index.html               # Main HTML template with SEO meta tags & fonts
+│   ├── manifest.json            # Web app manifest
+│   ├── profile.jpg              # Profile photograph
+│   └── resume.pdf               # Resume PDF file
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.js / Navbar.css
-│   │   ├── Hero.js / Hero.css
-│   │   ├── About.js / About.css
-│   │   ├── Skills.js / Skills.css
-│   │   ├── Experience.js / Experience.css
-│   │   ├── Projects.js / Projects.css
-│   │   ├── Education.js / Education.css
-│   │   ├── Achievements.js / Achievements.css
-│   │   ├── Contact.js / Contact.css
-│   │   └── Footer.js / Footer.css
-│   ├── App.js              ← Root component
-│   ├── App.css
-│   ├── index.js            ← React entry point
-│   └── index.css           ← Global design system
-├── .gitignore
+│   │   ├── Navbar.js / .css     # Sticky glass navbar with scroll progress & drawer
+│   │   ├── Hero.js / .css       # Animated typewriter, profile card, CTAs
+│   │   ├── About.js / .css      # Bio summary, spoken languages, industry exposure
+│   │   ├── Experience.js / .css # Ramatek Solution work experience timeline
+│   │   ├── Projects.js / .css   # Filterable professional ERP & personal projects
+│   │   ├── Skills.js / .css     # Categorized skill tabs & competency badges
+│   │   ├── Education.js / .css  # MCA (LPU) & BCA (BMU) degree cards
+│   │   ├── ContinuousLearning.js / .css # Focus areas & Power BI / Python learning
+│   │   ├── Contact.js / .css    # Interactive contact form & details
+│   │   └── Footer.js / .css     # Quick links, social buttons & top scroll button
+│   ├── App.js                   # Main application layout
+│   ├── App.css                  # Core app transition styles
+│   ├── index.js                 # React entry point
+│   └── index.css                # Global design system & custom CSS properties
 ├── package.json
 └── README.md
 ```
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation & Local Development
 
-**Step 1:** Open a terminal / PowerShell window
+### Prerequisites
 
-**Step 2:** Navigate to the project folder:
-```bash
-cd "C:\Users\Prith\OneDrive\Desktop\Portfolio"
-```
+- **Node.js** (v16.x or higher — v18/v20 recommended)
+- **npm** (v8.x or higher)
 
-**Step 3:** Install all dependencies:
-```bash
-npm install
-```
+### Setup Instructions
 
-This will create a `node_modules` folder and install React and all required packages.
-It may take 2–5 minutes depending on your internet speed.
+1. **Clone or navigate to the project directory**:
+   ```bash
+   cd "C:\Users\Prith\OneDrive\Desktop\Portfolio"
+   ```
 
----
+2. **Install project dependencies**:
+   ```bash
+   npm install
+   ```
 
-## 💻 Running Locally (Development Server)
-
-After installation, start the development server:
-
-```bash
-npm start
-```
-
-This will:
-- Start a local server at **http://localhost:3000**
-- Automatically open your browser
-- Reload the page when you make code changes
-
-**To stop the server:** Press `Ctrl + C` in the terminal.
+3. **Start the local development server**:
+   ```bash
+   npm start
+   ```
+   Open `http://localhost:3000` in your browser to view the live site with hot reload.
 
 ---
 
-## 🏗️ Building for Production
+## 🏗️ Build & Production Deployment
 
-To create an optimized production build:
+### Building for Production
+
+To create an optimized, minified production bundle in the `build/` directory:
 
 ```bash
 npm run build
 ```
 
-This creates a `build/` folder with:
-- Minified JavaScript and CSS
-- Optimized assets
-- Ready-to-deploy files
+### Deploying to GitHub Pages
+
+1. Ensure the `"homepage"` field in `package.json` matches your GitHub repository URL:
+   ```json
+   "homepage": "https://prithvirajanilkumarit-wq.github.io/Portfolio"
+   ```
+
+2. Run the automated deployment script:
+   ```bash
+   npm run deploy
+   ```
+
+This automatically executes `npm run build` and publishes the output to the `gh-pages` branch.
 
 ---
 
-## 🌐 GitHub Pages Deployment
+## ⚙️ Customization Guide
 
-### Step 1: Initialize Git repository
-
-```bash
-git init
-git add .
-git commit -m "Initial commit: Portfolio website"
-```
-
-### Step 2: Create a GitHub repository
-
-1. Go to https://github.com/new
-2. Name it `portfolio` or `prithviraj-portfolio`
-3. Keep it public
-4. Do NOT add README, .gitignore, or license (already included)
-
-### Step 3: Connect to GitHub
-
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git branch -M main
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` and `YOUR_REPO_NAME` with your actual GitHub username and repo name.
-
-### Step 4: Update homepage in package.json
-
-Open `package.json` and update the `"homepage"` field:
-```json
-"homepage": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME"
-```
-
-### Step 5: Install gh-pages (if not already installed)
-
-```bash
-npm install --save-dev gh-pages
-```
-
-### Step 6: Deploy
-
-```bash
-npm run deploy
-```
-
-This will:
-1. Build the project
-2. Push the `build/` folder to the `gh-pages` branch
-3. Your site will be live at: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME`
-
-> **Note:** It may take 2–5 minutes after deployment for the site to go live.
-
-### Step 7: Enable GitHub Pages (first time only)
-
-1. Go to your GitHub repo → **Settings** → **Pages**
-2. Under **Source**, select branch: `gh-pages`, folder: `/ (root)`
-3. Click **Save**
+- **Updating Resume Content**: To update your profile information, edit the data arrays within `src/components/About.js`, `Experience.js`, `Projects.js`, `Skills.js`, `Education.js`, and `ContinuousLearning.js`.
+- **Replacing Resume PDF**: Replace `public/resume.pdf` with your updated PDF file.
+- **Updating Profile Photo**: Replace `public/profile.jpg` with your photo.
+- **Changing Accent Colors**: Adjust CSS tokens (`--color-accent-primary`, `--gradient-accent`) inside `src/index.css`.
 
 ---
 
-## 🔧 Troubleshooting
+## 🖼️ Screenshots
 
-### ❌ `node` or `npm` not recognized
-
-**Solution:** Node.js is not installed or not in your PATH.
-1. Download Node.js from https://nodejs.org
-2. Restart your terminal after installation
-3. Try `node --version` again
+| Hero Section | Experience & Projects |
+| :---: | :---: |
+| ![Hero Screenshot Placeholder](https://via.placeholder.com/600x350/0b0f19/818cf8?text=Hero+Section) | ![Projects Screenshot Placeholder](https://via.placeholder.com/600x350/0b0f19/818cf8?text=Projects+Section) |
 
 ---
 
-### ❌ `npm install` fails
+## 📬 Contact Information
 
-**Solution:** Try clearing the npm cache:
-```bash
-npm cache clean --force
-npm install
-```
+**Prithviraj Anilkumar**  
+SQL Developer | ERP Reporting Developer | Data Analyst  
 
-Or delete `node_modules` and try again:
-```bash
-rmdir /s /q node_modules
-npm install
-```
+- **Location**: Surat, Gujarat, India  
+- **Email**: [prithviraj.anilkumar.it@gmail.com](mailto:prithviraj.anilkumar.it@gmail.com)  
+- **Phone**: [+91-7096512260](tel:+917096512260)  
+- **LinkedIn**: [prithviraj-anilkumar-974046329](https://www.linkedin.com/in/prithviraj-anilkumar-974046329/)  
+- **GitHub**: [github.com/prithvirajanilkumarit-wq](https://github.com/prithvirajanilkumarit-wq)  
 
 ---
 
-### ❌ Port 3000 already in use
+## 📄 License
 
-**Solution:** React will ask if you want to use another port. Press `Y` and Enter.
-Or close whatever is using port 3000 and restart.
-
----
-
-### ❌ Profile photo not showing
-
-Make sure `profile.jpg` is in the `public/` folder (not `src/`).
-The file should already be there. If not, copy your photo and rename it to `profile.jpg`.
-
----
-
-### ❌ GitHub Pages shows blank page
-
-**Solution:** Make sure `"homepage"` in `package.json` is set correctly:
-```json
-"homepage": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME"
-```
-Then run `npm run deploy` again.
-
----
-
-### ❌ Changes not reflecting after `npm run deploy`
-
-Hard refresh the browser: `Ctrl + Shift + R` (Windows) or `Cmd + Shift + R` (Mac).
-Also wait 2–5 minutes for GitHub Pages to update.
-
----
-
-## 📬 Contact
-
-**Prithviraj Anilkumar**
-- Email: prithviraj.anilkumar.it@gmail.com
-- Phone: +91-7096512260
-- LinkedIn: https://www.linkedin.com/in/prithviraj-anilkumar-974046329
-- GitHub: https://github.com/prithvirajanilkumarit-wq
-- Location: Surat, Gujarat 395017, India
+This project is open source and available under the [MIT License](LICENSE).
