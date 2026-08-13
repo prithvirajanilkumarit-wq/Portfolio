@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { FaGithub, FaFileDownload, FaTimes, FaBars, FaSun, FaMoon } from 'react-icons/fa';
+import { FaFileDownload, FaTimes, FaBars, FaSun, FaMoon } from 'react-icons/fa';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -76,26 +76,16 @@ function Navbar({ theme, onToggleTheme }) {
             )}
           </button>
 
-          {/* GitHub Star Pill */}
-          <a
-            href="https://github.com/prithvirajanilkumarit-wq/Portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="navbar-floating__github-btn"
-            aria-label="GitHub Repository"
-          >
-            <FaGithub className="navbar-floating__action-icon" />
-            <span className="navbar-floating__gh-text">GitHub</span>
-          </a>
-
-          {/* Resume Button */}
+          {/* Resume Download Button */}
           <a
             href={`${process.env.PUBLIC_URL}/resume.pdf`}
             download="Prithviraj_Anilkumar_Resume.pdf"
             className="navbar-floating__resume-btn"
             aria-label="Download Resume"
+            title="Download Resume"
           >
-            <FaFileDownload />
+            <FaFileDownload className="navbar-floating__action-icon" />
+            <span className="navbar-floating__resume-text">Resume</span>
           </a>
 
           {/* Mobile Hamburger */}

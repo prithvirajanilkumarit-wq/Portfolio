@@ -80,12 +80,16 @@
   transition: all var(--transition-fast);
 }
 
-.contact__item:hover .contact__copy-icon {
+.contact__item:hover .contact__copy-icon,
+.contact__item:active .contact__copy-icon,
+.contact__item:focus .contact__copy-icon {
   opacity: 1;
   color: var(--color-accent-purple);
 }
 
-.contact__item:hover {
+.contact__item:hover,
+.contact__item:active,
+.contact__item:focus {
   background: var(--color-bg-card-hover);
   border-color: var(--color-accent-purple);
   transform: translateX(3px);
@@ -119,6 +123,8 @@
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--color-text-bright);
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .contact__resume-box {
@@ -192,6 +198,10 @@
 }
 
 @media (max-width: 576px) {
+  .contact__info-card,
+  .contact__form {
+    padding: 1.1rem;
+  }
   .contact__input-group {
     grid-template-columns: 1fr;
   }

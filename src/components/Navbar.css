@@ -127,79 +127,38 @@
   transform: rotate(15deg) scale(1.05);
 }
 
-/* GitHub Star Pill */
-.navbar-floating__github-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  font-size: 0.78rem;
-  color: var(--color-text-main);
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.navbar-floating__github-btn:hover {
-  background: var(--color-bg-card-hover);
-  border-color: var(--color-border-hover);
-  color: var(--color-text-bright);
-}
-
-/* Search Button (⌘K) */
-.navbar-floating__search-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text-main);
-  font-family: var(--font-primary);
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.navbar-floating__search-btn:hover {
-  background: var(--color-bg-card-hover);
-  border-color: var(--color-border-hover);
-  color: var(--color-text-bright);
-}
-
-.navbar-floating__kbd {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  padding: 0.1rem 0.35rem;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  color: var(--color-text-muted);
-}
-
 /* Resume PDF button */
 .navbar-floating__resume-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: rgba(13, 148, 136, 0.15);
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border-active);
   border-radius: 8px;
-  color: var(--color-accent-purple);
-  font-size: 0.85rem;
+  color: var(--color-text-bright);
+  font-size: 0.78rem;
+  font-weight: 500;
   text-decoration: none;
   transition: all var(--transition-fast);
 }
 
+.navbar-floating__resume-btn .navbar-floating__action-icon {
+  color: var(--color-accent-purple);
+  font-size: 0.85rem;
+  transition: color var(--transition-fast);
+}
+
 .navbar-floating__resume-btn:hover {
   background: var(--color-accent-purple);
-  color: #fff;
+  border-color: var(--color-accent-purple);
+  color: #ffffff;
   transform: translateY(-1px);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.navbar-floating__resume-btn:hover .navbar-floating__action-icon {
+  color: #ffffff;
 }
 
 /* Hamburger */
@@ -219,8 +178,16 @@
 }
 
 @media (max-width: 820px) {
+  .navbar-floating {
+    width: calc(100% - 1.25rem);
+    top: 12px;
+  }
+
+  .navbar-floating__container {
+    padding: 0 0.85rem;
+  }
+
   .navbar-floating__nav,
-  .navbar-floating__github-btn,
   .navbar-floating__search-text,
   .navbar-floating__kbd {
     display: none;
@@ -234,19 +201,21 @@
   .navbar-floating__mobile {
     display: block;
     position: absolute;
-    top: 66px;
+    top: 64px;
     left: 0;
     right: 0;
+    max-width: 100%;
     background: var(--color-bg-card);
     backdrop-filter: blur(20px);
     border: 1px solid var(--color-border);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.25rem;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px);
     transition: all var(--transition-med);
+    overflow-x: hidden;
   }
 
   .navbar-floating__mobile--open {
@@ -273,5 +242,20 @@
     gap: 0.75rem;
     flex-direction: column;
     margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar-floating__actions {
+    gap: 0.4rem;
+  }
+
+  .navbar-floating__resume-text {
+    display: none;
+  }
+
+  .navbar-floating__resume-btn {
+    padding: 0.42rem 0.5rem;
+    border-radius: 8px;
   }
 }

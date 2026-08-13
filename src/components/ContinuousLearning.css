@@ -120,3 +120,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 576px) {
+  .learning__card {
+    padding: 1.1rem;
+  }
+  .learning__card-title {
+    font-size: 1.2rem;
+  }
+}

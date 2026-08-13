@@ -207,10 +207,15 @@
 }
 
 @media (max-width: 576px) {
+  .about__profile-card,
+  .about__summary-card {
+    padding: 1.1rem;
+  }
   .about__industry-grid {
     grid-template-columns: 1fr;
   }
   .about__stats-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
   }
 }

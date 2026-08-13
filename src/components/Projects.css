@@ -156,3 +156,20 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 576px) {
+  .projects__card {
+    padding: 1.1rem;
+  }
+  .projects__filters {
+    gap: 0.4rem;
+  }
+  .projects__filter-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+  }
+  .projects__notice {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+  }
+}

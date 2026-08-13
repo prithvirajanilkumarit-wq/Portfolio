@@ -155,3 +155,12 @@
     align-items: flex-start;
   }
 }
+
+@media (max-width: 576px) {
+  .experience__card {
+    padding: 1.1rem;
+  }
+  .experience__role {
+    font-size: 1.2rem;
+  }
+}
